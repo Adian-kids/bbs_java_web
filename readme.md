@@ -42,14 +42,11 @@
 | content   | varchar  | 回复内容                   |
 | time      | datetime | 回复时间                   |
 | isReply   | int      | 是否是回复其他评论(0否1是) |
-| toReplyId | int      | 回复的评论id,可空          |
+| toReplyId | int      | 回复的评论id               |
 
 ### section
-| 字段       | 类型    | 说明                |
-| ---------- | ------- | ------------------- |
-| sectionId  | int     | 主键，Auto increase |
-| name       | varchar | 版块名称            |
-| classifyId | int     | 外键，所属分类id    |
+| 字段      | 类型     | 说明                |
+| --------- | -------- | ------------------- |
 
 ### users 
 

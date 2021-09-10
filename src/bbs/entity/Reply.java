@@ -6,6 +6,8 @@ public class Reply {
     private int userId;
     private String content;
     private String time;
+    private int isReply;
+    private int toReplyId;
 
     public int getReplyId() {
         return replyId;
@@ -45,5 +47,21 @@ public class Reply {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public int getIsReply() {
+        return isReply;
+    }
+
+    public void setIsReply(int isReply) {
+        this.isReply = isReply;
+    }
+
+    public int getToReplyId() {
+        return toReplyId;
+    }
+
+    public void setToReplyId(int toReplyId) {
+        this.toReplyId = toReplyId;
     }
 }
