@@ -42,7 +42,7 @@
 | content   | varchar  | 回复内容                   |
 | time      | datetime | 回复时间                   |
 | isReply   | int      | 是否是回复其他评论(0否1是) |
-| toReplyId | int      | 回复的评论id               |
+| toReplyId | int      | 回复的评论id,可空          |
 
 ### section
 | 字段       | 类型    | 说明                |
