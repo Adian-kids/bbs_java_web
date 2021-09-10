@@ -12,7 +12,11 @@ class baseDaoTest extends baseDao{
         baseDao basedao = new baseDao();
         try {
             Map result = basedao.sqlQuery(sql,null);
-            System.out.println(result);
+            ResultSet selectResult = (ResultSet) result.get("selectResult");
+            while (selectResult.next()){
+                String name = selectResult.getString("name");
+                System.out.println(name);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {

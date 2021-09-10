@@ -2,6 +2,7 @@ package bbs.dao.impl;
 
 
 import java.sql.*;
+import java.util.HashMap;
 import java.util.Map;
 
 public class baseDao {
@@ -36,8 +37,8 @@ public class baseDao {
      * @throws ClassNotFoundException
      */
     public Map sqlQuery(String prepareString, String[] params) throws SQLException, ClassNotFoundException {
-        Map resultMap = null;
 
+        Map resultMap = new HashMap();
         Connection sqlConnection = getConnection();
         PreparedStatement prepareSql = sqlConnection.prepareStatement(prepareString);
         if(params !=null){
@@ -48,10 +49,14 @@ public class baseDao {
         switch (prepareString.substring(0,6)){
             case "SELECT":
                 ResultSet selectResult = prepareSql.executeQuery();
+                resultMap.put("resultClassify","SELECT");
                 resultMap.put("selectResult",selectResult);
+                break;
             default:
                 int rowNum = prepareSql.executeUpdate();
+                resultMap.put("resultClassify","rowNum");
                 resultMap.put("rowNum",rowNum);
+
 
         }
         return resultMap;
