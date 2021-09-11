@@ -2,6 +2,7 @@ package bbs.dao;
 
 import bbs.entity.Reply;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface replyDao {
@@ -10,7 +11,7 @@ public interface replyDao {
      * @param replyId
      * @return
      */
-    public Reply getReplyInfoByReplyId(int replyId);
+    public Reply getReplyInfoByReplyId(int replyId) throws SQLException, ClassNotFoundException;
 
     /**
      * 新增回复

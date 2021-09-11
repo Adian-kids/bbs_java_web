@@ -49,12 +49,10 @@ public class baseDao {
         switch (prepareString.substring(0,6)){
             case "SELECT":
                 ResultSet selectResult = prepareSql.executeQuery();
-                resultMap.put("resultClassify","SELECT");
                 resultMap.put("selectResult",selectResult);
                 break;
             default:
                 int rowNum = prepareSql.executeUpdate();
-                resultMap.put("resultClassify","rowNum");
                 resultMap.put("rowNum",rowNum);
 
 

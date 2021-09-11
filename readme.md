@@ -45,8 +45,11 @@
 | toReplyId | int      | 回复的评论id               |
 
 ### section
-| 字段      | 类型     | 说明                |
-| --------- | -------- | ------------------- |
+| 字段       | 类型    | 说明                 |
+| ---------- | ------- | -------------------- |
+| sectionId  | int     | 版块Id,auto Increase |
+| name       | varchar | 版块名称             |
+| classifyId | int     | 外键，所属分类id     |
 
 ### users 
 

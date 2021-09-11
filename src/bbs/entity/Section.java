@@ -3,7 +3,7 @@ package bbs.entity;
 public class Section {
     private int sectionId;
     private int classifyId;
-    private int name;
+    private String name;
 
     public int getSectionId() {
         return sectionId;
@@ -21,11 +21,11 @@ public class Section {
         this.classifyId = classifyId;
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(int name) {
+    public void setName(String name) {
         this.name = name;
     }
 }

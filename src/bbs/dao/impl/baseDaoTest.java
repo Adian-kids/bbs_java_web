@@ -1,27 +1,35 @@
 package bbs.dao.impl;
 
 
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
-import bbs.dao.impl.baseDao;
+import bbs.dao.impl.forumDaoImpl;
+import bbs.entity.Classify;
+import bbs.entity.Forum;
 
-class baseDaoTest extends baseDao{
-    public static void main(String[] args) {
-        String sql = "SELECT * FROM forum";
+class baseDaoTest{
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        //Forum newForm = new Forum();
+        //newForm.setName("New Name For BBS");
+        //newForm.setIntroduction("一起来玩耍");
+        //forumDaoImpl forumdaoimpl = new forumDaoImpl();
+        //int rowNum = forumdaoimpl.editForumInfo(newForm);
+        //System.out.println(rowNum);
+
+        //classifyDaoImpl classifydaoimpl = new classifyDaoImpl();
+        //Classify classify = (Classify) classifydaoimpl.getClassifyContentByClassifyId(1);
+        //System.out.println(classify.getName());
+
         baseDao basedao = new baseDao();
-        try {
-            Map result = basedao.sqlQuery(sql,null);
-            ResultSet selectResult = (ResultSet) result.get("selectResult");
-            while (selectResult.next()){
-                String name = selectResult.getString("name");
-                System.out.println(name);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        String checkSqlString = "SELECT passwd FROM users WHERE userId=33" ;
+        Map selectResult = basedao.sqlQuery(checkSqlString,null);
+        ResultSet selectResultSet = (ResultSet) selectResult.get("selectResult");
+        if (selectResultSet != null){
+            System.out.println("-1");
         }
+
 
     }
 
