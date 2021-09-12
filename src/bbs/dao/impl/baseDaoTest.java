@@ -22,13 +22,16 @@ class baseDaoTest{
         //Classify classify = (Classify) classifydaoimpl.getClassifyContentByClassifyId(1);
         //System.out.println(classify.getName());
 
-        baseDao basedao = new baseDao();
-        String checkSqlString = "SELECT passwd FROM users WHERE userId=33" ;
-        Map selectResult = basedao.sqlQuery(checkSqlString,null);
-        ResultSet selectResultSet = (ResultSet) selectResult.get("selectResult");
-        if (selectResultSet != null){
-            System.out.println("-1");
-        }
+        //baseDao basedao = new baseDao();
+        //String checkSqlString = "SELECT passwd FROM users WHERE userId=33" ;
+        //Map selectResult = basedao.sqlQuery(checkSqlString,null);
+        //ResultSet selectResultSet = (ResultSet) selectResult.get("selectResult");
+        //if (selectResultSet != null){
+        //    System.out.println("-1");
+        //}
+        forumDaoImpl dao = new forumDaoImpl();
+        Forum forum = dao.getForumInfo();
+        System.out.println(forum.getName());
 
 
     }
