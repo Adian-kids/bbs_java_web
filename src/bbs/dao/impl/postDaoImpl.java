@@ -23,9 +23,9 @@ public class postDaoImpl implements postDao {
         String sqlString = "SELECT * FROM posts WHERE postId=?";
         String[] params = {Integer.toString(postId)};
         baseDao basedao = new baseDao();
-        Map selectResult = basedao.sqlQuery(sqlString,params);
+        Map selectResult = basedao.sqlQuery(sqlString, params);
         ResultSet selectResultSet = (ResultSet) selectResult.get("selectResult");
-        while (selectResultSet.next()){
+        while (selectResultSet.next()) {
             post.setPostId(postId);
             post.setSectionId(selectResultSet.getInt("sectionId"));
             post.setUserId(selectResultSet.getInt("userId"));
