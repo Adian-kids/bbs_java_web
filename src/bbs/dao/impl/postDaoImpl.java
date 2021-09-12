@@ -132,6 +132,6 @@ public class postDaoImpl implements postDao {
         while (selectResultSet.next()){
             replyIdList.add(selectResultSet.getInt("replyId"));
         }
-        return null;
+        return replyIdList;
     }
 }

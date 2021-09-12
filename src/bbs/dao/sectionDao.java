@@ -2,32 +2,34 @@ package bbs.dao;
 
 import bbs.entity.Section;
 
+import java.sql.SQLException;
+
 public interface sectionDao {
     /**
      * 通过sectionId获取版块信息
      * @param sectionId
      * @return
      */
-    public Section getSectionInfoBySectionId(int sectionId);
+    public Section getSectionInfoBySectionId(int sectionId) throws SQLException, ClassNotFoundException;
 
     /**
      * 增加版块
      * @param section
      * @return
      */
-    public int addSection(Section section);
+    public int addSection(Section section) throws SQLException, ClassNotFoundException;
 
     /**
      * 通过版块id删除版块
      * @param sectionId
      * @return
      */
-    public int deleteSectionBySectionId(int sectionId);
+    public int deleteSectionBySectionId(int sectionId) throws SQLException, ClassNotFoundException;
 
     /**
      * 修改版块信息
      * @param section
      * @return
      */
-    public int editSectionInfo(Section section);
+    public int editSectionInfo(Section section) throws SQLException, ClassNotFoundException;
 }
