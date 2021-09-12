@@ -42,8 +42,27 @@ public class replyDaoImpl implements replyDao {
      * @return
      */
     @Override
-    public int addReply(Reply reply) {
-        return 0;
+    public int addReply(Reply reply) throws SQLException, ClassNotFoundException {
+
+        int postId = reply.getPostId();
+        int userId =  reply.getUserId();
+        String content = reply.getContent();
+        String time = reply.getTime();
+        int isReply = reply.getIsReply();
+        int toReplyId = reply.getToReplyId();
+        baseDao basedao = new baseDao();
+        String sqlString = "INSERT INTO reply (postId,userId,content,time,isReply,toReplyId) VALUES (?,?,?,?,?,?)";
+        String[] params = {Integer.toString(postId),
+                Integer.toString(userId),
+                content,
+                time,
+                Integer.toString(isReply),
+                Integer.toString(toReplyId)
+        };
+        Map insertResult = basedao.sqlQuery(sqlString,params);
+        int rowNum = (int) insertResult.get("rowNum");
+        return  rowNum;
+
     }
 
     /**
@@ -53,7 +72,12 @@ public class replyDaoImpl implements replyDao {
      * @return
      */
     @Override
-    public int deleteReplyByReplyId(int replyId) {
-        return 0;
+    public int deleteReplyByReplyId(int replyId) throws SQLException, ClassNotFoundException {
+        String sqlString = "DELETE FROM reply WHERE replyId=?";
+        String[] params = {Integer.toString(replyId)};
+        baseDao basedao = new baseDao();
+        Map deleteResult = basedao.sqlQuery(sqlString,params);
+        int rowNum = (int) deleteResult.get("rowNum");
+        return rowNum;
     }
 }

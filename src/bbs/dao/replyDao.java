@@ -18,12 +18,12 @@ public interface replyDao {
      * @param reply
      * @return
      */
-    public int addReply (Reply reply);
+    public int addReply (Reply reply) throws SQLException, ClassNotFoundException;
 
     /**
      * 删除回复
      * @param replyId
      * @return
      */
-    public int deleteReplyByReplyId(int replyId);
+    public int deleteReplyByReplyId(int replyId) throws SQLException, ClassNotFoundException;
 }
