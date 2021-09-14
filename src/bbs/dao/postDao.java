@@ -48,4 +48,22 @@ public interface postDao {
      */
     public List getAllReplyIdByPostId(int postId) throws SQLException, ClassNotFoundException;
 
+    /**
+     * 获取主页展示的十条最新文章
+     * @return
+     */
+
+    public List getTop10Post() throws SQLException, ClassNotFoundException;
+    /**
+     * 分页获取某一section下所有post对象
+     * @param int sectionId
+     * @param sectionId
+     */
+    public List getAllPost(int sectionId, int page) throws SQLException, ClassNotFoundException;
+
+    /**
+     * 获取页数
+     */
+    public  int getPageSum() throws SQLException, ClassNotFoundException;
+
 }

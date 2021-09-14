@@ -38,7 +38,7 @@ public class classifyDaoImpl implements classifyDao  {
      */
     @Override
     public List getAllSectionContentByClassifyId(int classifyId) throws SQLException, ClassNotFoundException {
-        List resultList = new ArrayList();
+        List<Section> resultList = new ArrayList();
         String sqlString = "SELECT sectionId,name FROM section WHERE classifyId=?";
         String[] params = {Integer.toString(classifyId)};
         baseDao basedao = new baseDao();
@@ -100,5 +100,24 @@ public class classifyDaoImpl implements classifyDao  {
         Map updateResult = basedao.sqlQuery(sqlString,params);
         int resultCode = (int) updateResult.get("rowNum");
         return resultCode;
+    }
+
+    /**
+     * 获取所有分类信息
+     */
+    @Override
+    public List<Classify> getAllClassifyInfo() throws SQLException, ClassNotFoundException {
+        List<Classify> resultList = new ArrayList();
+        String sqlString = "SELECT * FROM classify";
+        baseDao basedao = new baseDao();
+        Map selectResult = basedao.sqlQuery(sqlString,null);
+        ResultSet selectResultSet = (ResultSet) selectResult.get("selectResult");
+        while (selectResultSet.next()){
+            Classify classify = new Classify();
+            classify.setClassifyId(selectResultSet.getInt("classifyId"));
+            classify.setName(selectResultSet.getString("name"));
+            resultList.add(classify);
+        }
+        return resultList;
     }
 }

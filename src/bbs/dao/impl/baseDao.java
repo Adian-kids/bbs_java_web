@@ -22,7 +22,6 @@ public class baseDao {
         // 注册 JDBC 驱动
         Class.forName(JDBC_DRIVER);
         // 打开链接
-        System.out.println("连接数据库...");
         Connection sqlConnection = DriverManager.getConnection(DB_URL,USER,PASS);
 
         return sqlConnection;
@@ -46,6 +45,7 @@ public class baseDao {
                 prepareSql.setString(i + 1,params[i]);
             }
         }
+        System.out.println(prepareSql);
         switch (prepareString.substring(0,6)){
             case "SELECT":
                 ResultSet selectResult = prepareSql.executeQuery();

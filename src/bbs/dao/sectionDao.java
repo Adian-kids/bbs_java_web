@@ -3,6 +3,7 @@ package bbs.dao;
 import bbs.entity.Section;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public interface sectionDao {
     /**
@@ -32,4 +33,10 @@ public interface sectionDao {
      * @return
      */
     public int editSectionInfo(Section section) throws SQLException, ClassNotFoundException;
+
+    /**
+     *
+     * @return
+     */
+    public List<Section> getAllSection() throws SQLException, ClassNotFoundException;
 }

@@ -5,6 +5,8 @@ import bbs.entity.Section;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class sectionDaoImpl implements sectionDao {
@@ -81,5 +83,25 @@ public class sectionDaoImpl implements sectionDao {
         Map updateResult = basedao.sqlQuery(sqlString,params);
         int rowNum = (int) updateResult.get("rowNum");
         return rowNum;
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public List<Section> getAllSection() throws SQLException, ClassNotFoundException {
+        List<Section> sectionList = new ArrayList();
+        String sqlString = "SELECT * FROM section";
+        baseDao basedao = new baseDao();
+        Map selectResult = basedao.sqlQuery(sqlString,null);
+        ResultSet selectResultSet = (ResultSet) selectResult.get("selectResult");
+        while (selectResultSet.next()){
+            Section section = new Section();
+            section.setSectionId(selectResultSet.getInt("sectionId"));
+            section.setName(selectResultSet.getString("name"));
+            section.setClassifyId(selectResultSet.getInt("classifyId"));
+            sectionList.add(section);
+        }
+        return sectionList;
     }
 }

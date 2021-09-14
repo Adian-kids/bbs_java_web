@@ -4,6 +4,7 @@ import bbs.entity.Classify;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 public interface classifyDao {
     /**
@@ -31,4 +32,9 @@ public interface classifyDao {
      * @param classify
      */
     public int editClassifyInfo(Classify classify) throws SQLException, ClassNotFoundException;
+    /**
+     * 获取所有分类信息
+     *
+     */
+    public List getAllClassifyInfo() throws SQLException,ClassNotFoundException;
 }

@@ -3,7 +3,6 @@ package bbs.dao.impl;
 import bbs.dao.postDao;
 import bbs.entity.Post;
 
-import java.io.ByteArrayInputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -133,5 +132,79 @@ public class postDaoImpl implements postDao {
             replyIdList.add(selectResultSet.getInt("replyId"));
         }
         return replyIdList;
+    }
+
+    /**
+     * 获取主页展示的十条最新文章
+     *
+     * @return
+     */
+    @Override
+    public List getTop10Post() throws SQLException, ClassNotFoundException {
+        baseDao basedao = new baseDao();
+        List<Post> postList = new ArrayList();
+        String sqlString = "SELECT * FROM posts LIMIT 10";
+        Map selectResult = basedao.sqlQuery(sqlString,null);
+        ResultSet selectResultSet = (ResultSet) selectResult.get("selectResult");
+        while (selectResultSet.next()){
+            Post post = new Post();
+            post.setPostId(selectResultSet.getInt("postId"));
+            post.setTitle(selectResultSet.getString("title"));
+            post.setUserId(selectResultSet.getInt("userId"));
+            postList.add(post);
+        }
+
+        return postList;
+    }
+
+    /**
+     * 分页获取某一section下所有post对象
+     *  @param sectionId
+     * @param page
+     */
+    @Override
+    public List getAllPost(int sectionId, int page) throws SQLException, ClassNotFoundException {
+
+        int index = (int) ((page - 1) * 10 + 1);
+        int end = (int) ((page - 1)* 10 + 10);
+        System.out.println(index);
+        System.out.println(end);
+
+        List resultList = new ArrayList();
+        String sqlString = "SELECT * FROM posts WHERE sectionId=? LIMIT "+index+","+end;
+        String[] params = {Integer.toString(sectionId)};
+        baseDao basedao = new baseDao();
+        Map selectResult = basedao.sqlQuery(sqlString,params);
+        ResultSet selectResultSet = (ResultSet) selectResult.get("selectResult");
+        while (selectResultSet.next()){
+            Post post = new Post();
+            post.setUserId(selectResultSet.getInt("postId"));
+            post.setTitle(selectResultSet.getString("title"));
+            post.setUserId(selectResultSet.getInt("userId"));
+            post.setTime(selectResultSet.getString("time"));
+            resultList.add(post);
+        }
+
+        return resultList;
+    }
+
+    /**
+     * 获取页数
+     */
+    @Override
+    public int getPageSum() throws SQLException, ClassNotFoundException {
+        int pageSum = 0;
+        String sqlString = "SELECT count(*) AS counts FROM posts";
+        baseDao basedao = new baseDao();
+        Map selectResult = basedao.sqlQuery(sqlString,null);
+        ResultSet selectResultSet = (ResultSet) selectResult.get("selectResult");
+        while (selectResultSet.next()){
+            pageSum = selectResultSet.getInt("counts") / 10;
+            if(pageSum==0){
+                pageSum = 1;
+            }
+        }
+
+        return pageSum;
     }
 }
