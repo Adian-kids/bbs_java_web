@@ -49,7 +49,7 @@
             <tbody>
             <c:forEach var="post" items="${postList}">
                 <tr>
-                    <td><a href="post?id=${post.postId}">${post.title}</a></td>
+                    <td><a href="post?postId=${post.postId}">${post.title}</a></td>
                     <td>${post.userId}</td>
                     <td>${post.time}</td>
                 </tr>

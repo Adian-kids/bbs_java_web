@@ -26,4 +26,5 @@ public interface replyDao {
      * @return
      */
     public int deleteReplyByReplyId(int replyId) throws SQLException, ClassNotFoundException;
+
 }

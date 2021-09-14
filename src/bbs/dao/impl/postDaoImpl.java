@@ -2,6 +2,7 @@ package bbs.dao.impl;
 
 import bbs.dao.postDao;
 import bbs.entity.Post;
+import bbs.entity.Reply;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -178,7 +179,7 @@ public class postDaoImpl implements postDao {
         ResultSet selectResultSet = (ResultSet) selectResult.get("selectResult");
         while (selectResultSet.next()){
             Post post = new Post();
-            post.setUserId(selectResultSet.getInt("postId"));
+            post.setPostId(selectResultSet.getInt("postId"));
             post.setTitle(selectResultSet.getString("title"));
             post.setUserId(selectResultSet.getInt("userId"));
             post.setTime(selectResultSet.getString("time"));
@@ -207,4 +208,29 @@ public class postDaoImpl implements postDao {
 
         return pageSum;
     }
+
+    /**
+     * 获取某post下所有的reply
+     */
+    @Override
+    public List getAllReplyInfo(int postId) throws SQLException, ClassNotFoundException {
+        List resultList = new ArrayList();
+        String sqlString = "SELECT * FROM reply WHERE postId=?";
+        String[] params = {Integer.toString(postId)};
+        baseDao basedao = new baseDao();
+        Map selectReuslt = basedao.sqlQuery(sqlString,params);
+        ResultSet selectResultSet = (ResultSet) selectReuslt.get("selectResult");
+        while (selectResultSet.next()){
+            Reply reply = new Reply();
+            reply.setReplyId(selectResultSet.getInt("replyId"));
+            reply.setUserId(selectResultSet.getInt("userId"));
+            reply.setContent(selectResultSet.getString("content"));
+            reply.setIsReply(selectResultSet.getInt("isReply"));
+            reply.setToReplyId(selectResultSet.getInt("toReplyId"));
+            reply.setTime(selectResultSet.getString("time"));
+            resultList.add(reply);
+        }
+        return resultList;
+    }
+
 }

@@ -64,6 +64,12 @@ public interface postDao {
     /**
      * 获取页数
      */
-    public  int getPageSum() throws SQLException, ClassNotFoundException;
+    public int getPageSum() throws SQLException, ClassNotFoundException;
+
+    /**
+     * 获取某post下所有的reply
+     * @param int postId
+     */
+    public List getAllReplyInfo(int postId) throws SQLException, ClassNotFoundException;
 
 }
