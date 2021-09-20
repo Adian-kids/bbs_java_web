@@ -21,7 +21,6 @@ public class forumDaoImpl implements forumDao {
         Map selectResult = basedao.sqlQuery(sql,null);
         ResultSet selectResultSet = (ResultSet) selectResult.get("selectResult");
         while (selectResultSet.next()) {
-            System.out.println("123");
             forum.setName(selectResultSet.getString("name"));
             forum.setIntroduction(selectResultSet.getString("introduction"));
             forum.setCreateDate(selectResultSet.getString("createDate"));

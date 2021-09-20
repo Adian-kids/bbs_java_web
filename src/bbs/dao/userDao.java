@@ -3,6 +3,7 @@ package bbs.dao;
 import bbs.entity.User;
 
 import javax.swing.plaf.PanelUI;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 public interface userDao {
@@ -11,7 +12,7 @@ public interface userDao {
      * @param user
      * @return
      */
-    public int addUser(User user) throws SQLException, ClassNotFoundException;
+    public int addUser(User user) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException;
     /**
      * 检查邮箱是否已经注册
      * @param email
@@ -45,4 +46,8 @@ public interface userDao {
      */
     public int changePassByUserId(int userId,String oldPass,String passwd) throws SQLException, ClassNotFoundException;
 
+    /**
+     * 检查登陆
+     */
+    public int userLoginCheck(User user) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException;
 }

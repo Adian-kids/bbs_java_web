@@ -28,7 +28,7 @@
         </div>
         <div class="col-md-4">
             <div class="border border-secondary" >
-                <p align="right">您尚未<a href="#">登陆</a>|<a href="#">注册</a></p>
+                <p align="right">您尚未<a href="pages/login.jsp">登陆</a>|<a href="pages/register.jsp">注册</a></p>
             </div>
         </div>
     </div>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="panel-body">
                     <c:forEach var="post" items="${postList}">
-                        <a href="postServlet?id=${post.postId}" class="list-group-item">${post.title}</a>
+                        <a href="post?postId=${post.postId}" class="list-group-item">${post.title}</a>
                     </c:forEach>
                 </div>
             </div>

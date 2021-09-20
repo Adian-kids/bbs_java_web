@@ -43,20 +43,7 @@
             <hr/>
             <h4>${post.content}</h4>
         </div>
-        <:c:forEach var="reply" items="allReply">
-            <div class="panel-heading">回复</div>
-            <div class="panel-body">
-                <c:if test="${reply.isReply==1}">
-                    <div class="panel-heading">回复帖子</div>
-                    <div class="panel-body">
-                        <%
-                            //.replyDaoImpl replydao = new replyDaoImpl().getReplyInfoByReplyId(request.getAttribute("allPost"));
-                        %>
-                    </div>
-                </c:if>
-                <h4>${reply.content}</h4>
-            </div>
-        </:c:forEach>
+
 
 
 
