@@ -44,10 +44,22 @@ public interface userDao {
      * @param userId
      * @return
      */
-    public int changePassByUserId(int userId,String oldPass,String passwd) throws SQLException, ClassNotFoundException;
+    public int changePassByUserId(int userId, String oldPass, String passwd) throws SQLException, ClassNotFoundException;
 
     /**
      * 检查登陆
+     *
+     * @param user
      */
     public int userLoginCheck(User user) throws SQLException, ClassNotFoundException, NoSuchAlgorithmException;
+
+    /**
+     * 通过EMAIL获取userId
+     *
+     * @param userId
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    public User getUserInfoByEmail(String email) throws SQLException, ClassNotFoundException;
 }

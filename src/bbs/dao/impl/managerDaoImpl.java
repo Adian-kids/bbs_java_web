@@ -111,4 +111,26 @@ public class managerDaoImpl implements managerDao {
 
         return managerList;
     }
+
+    /**
+     * 检查是否为管理员
+     *
+     * @param userId
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    @Override
+    public int checkManager(int userId) throws SQLException, ClassNotFoundException {
+        String sqlString = "SELECT * FROM manager WHERE userId='" + userId + "'";
+        baseDao basedao = new baseDao();
+        Map selectResult = basedao.sqlQuery(sqlString, null);
+        ResultSet selectResultSet = (ResultSet) selectResult.get("selectResult");
+
+        if (selectResultSet.next()) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }

@@ -19,17 +19,19 @@
             </ol>
         </div>
         <div class="col-md-4">
-            <div class="input-group">
-                <input type="text" class="form-control" aria-label="...">
-                <div class="input-group-btn">
-                    <button type="button" class="btn btn-default">Search</button>
-                </div>
-            </div>
+            <a href="addPost"><button type="button" class="btn btn-primary btn-lg btn-block">发帖</button></a>
         </div>
         <div class="col-md-4">
+            <c:if test="${state == 0}">
             <div class="border border-secondary" >
                 <p align="right">您尚未<a href="pages/login.jsp">登陆</a>|<a href="pages/register.jsp">注册</a></p>
             </div>
+            </c:if>
+            <c:if test="${state == 1}">
+                <div class="border border-secondary" >
+                    <p align="right">欢迎${nickname},进入<a href="profile?userId=${userId}">个人主页</a> </p>
+                </div>
+            </c:if>
         </div>
     </div>
     <!--两个面板 -->

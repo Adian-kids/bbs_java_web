@@ -5,6 +5,8 @@ import bbs.entity.Reply;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 public class replyDaoImpl implements replyDao {
@@ -45,9 +47,10 @@ public class replyDaoImpl implements replyDao {
     public int addReply(Reply reply) throws SQLException, ClassNotFoundException {
 
         int postId = reply.getPostId();
-        int userId =  reply.getUserId();
+        int userId = reply.getUserId();
         String content = reply.getContent();
-        String time = reply.getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        String time = df.format(new Date());// new Date()为获取当前系统时间
         int isReply = reply.getIsReply();
         int toReplyId = reply.getToReplyId();
         baseDao basedao = new baseDao();

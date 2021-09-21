@@ -35,10 +35,21 @@ public interface managerDao {
 
     /**
      * 查询某一section下所有管理员信息
+     *
      * @param sectionId
      * @return
      */
     public List getManagerInfoBySectionId(int sectionId) throws SQLException, ClassNotFoundException;
+
+    /**
+     * 检查是否为管理员
+     *
+     * @param userId
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    public int checkManager(int userId) throws SQLException, ClassNotFoundException;
 
 
 }

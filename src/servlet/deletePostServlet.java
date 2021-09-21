@@ -1,8 +1,7 @@
 package servlet;
 
-import bbs.dao.impl.*;
-import bbs.entity.*;
 
+import bbs.dao.impl.*;
 
 import java.io.*;
 import java.net.URLDecoder;
@@ -12,13 +11,12 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-@WebServlet("/index")
-public class indexServlet extends HttpServlet {
+@WebServlet("/deletePost")
+public class deletePostServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response)
-            throws ServletException, IOException
-    {
+            throws ServletException, IOException {
 
         try {
             int loginState = 0;
@@ -35,24 +33,18 @@ public class indexServlet extends HttpServlet {
                         String nickname = new userDaoImpl().getUserInfoById(Integer.valueOf(userId)).getNickname();
                         request.setAttribute("nickname", nickname);
                         request.setAttribute("userId", userId);
-
                     }
                 }
 
             }
-            forumDaoImpl dao = new forumDaoImpl();
-            Forum forum = dao.getForumInfo();
-            List<Classify> allClassify = new classifyDaoImpl().getAllClassifyInfo();
-            List<Section> allSection = new sectionDaoImpl().getAllSection();
-            List<Post> top10Post = new postDaoImpl().getTop10Post();
 
-            request.setAttribute("classifyList", allClassify);
-            request.setAttribute("sectionList", allSection);
-            request.setAttribute("postList", top10Post);
+            String postId = request.getParameter("postId");
+            int deleteResult = new postDaoImpl().deletePostByPostId(Integer.valueOf(postId));
+            request.setAttribute("deleteResult", deleteResult);
+
             request.setAttribute("state", loginState);
 
-
-            request.getRequestDispatcher("/pages/index.jsp").forward(request, response);
+            request.getRequestDispatcher("/pages/profile.jsp").forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {

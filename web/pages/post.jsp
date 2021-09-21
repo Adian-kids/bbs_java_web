@@ -18,22 +18,26 @@
         <div class="col-md-4">
             <ol class="breadcrumb">
                 <li><a href="#">Forum</a></li>
-                <li><a href="/section">Section</a> </li>
+                <li><a href="/section">Section</a></li>
                 <li class="active">${post.title}</li>
             </ol>
         </div>
         <div class="col-md-4">
-            <div class="input-group">
-                <input type="text" class="form-control" aria-label="...">
-                <div class="input-group-btn">
-                    <button type="button" class="btn btn-default">Search</button>
-                </div>
-            </div>
+            <a href="addPost">
+                <button type="button" class="btn btn-primary btn-lg btn-block">发帖</button>
+            </a>
         </div>
         <div class="col-md-4">
-            <div class="border border-secondary" >
-                <p align="right">您尚未<a href="#">登陆</a>|<a href="#">注册</a></p>
-            </div>
+            <c:if test="${state == 0}">
+                <div class="border border-secondary">
+                    <p align="right">您尚未<a href="pages/login.jsp">登陆</a>|<a href="pages/register.jsp">注册</a></p>
+                </div>
+            </c:if>
+            <c:if test="${state == 1}">
+                <div class="border border-secondary">
+                    <p align="right">欢迎${nickname},进入<a href="profile?userId=${userId}">个人主页</a></p>
+                </div>
+            </c:if>
         </div>
     </div>
     <div class="panel panel-primary">
@@ -43,12 +47,39 @@
             <hr/>
             <h4>${post.content}</h4>
         </div>
-
-
-
-
-
     </div>
+    <form class="form-horizontal" role="form" action="addReply" method="get">
+        <div class="form-group">
+            <label>发表评论</label>
+            <textarea class="form-control" rows="5" id="content" name="content"></textarea>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-lg btn-block">回复</button>
+        </div>
+        <div class="form-group">
+            <input name="postId" hidden="hidden" value="${post.postId}">
+        </div>
+    </form>
+    <c:forEach var="reply" items="${allReply}">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    回复来自<%=new userDaoImpl().getUserInfoById(pageContext.getAttributesScope("userId")).getNickname()%>
+                </h3>
+            </div>
+            <div class="panel-body">
+                    ${reply.content}
+            </div>
+        </div>
+    </c:forEach>
+    <c:if test="${insertResult == 0}">
+        <div class="alert alert-danger" role="alert">评论失败</div>
+    </c:if>
+    <c:if test="${insertResult == 1}">
+        <div class="alert alert-success" role="alert">评论成功</div>
+        <script> window.location.href = "post?postId=${postId}"</script>
+    </c:if>
+
 </div>
 </body>
 </html>

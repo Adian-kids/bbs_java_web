@@ -1,8 +1,10 @@
 package servlet;
 
-import bbs.dao.impl.*;
-import bbs.entity.*;
-
+import bbs.dao.impl.postDaoImpl;
+import bbs.dao.impl.replyDaoImpl;
+import bbs.dao.impl.userDaoImpl;
+import bbs.entity.Post;
+import bbs.entity.Reply;
 
 import java.io.*;
 import java.net.URLDecoder;
@@ -12,13 +14,12 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-@WebServlet("/index")
-public class indexServlet extends HttpServlet {
+@WebServlet("/addReply")
+public class addReplyServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response)
-            throws ServletException, IOException
-    {
+            throws ServletException, IOException {
 
         try {
             int loginState = 0;
@@ -35,24 +36,23 @@ public class indexServlet extends HttpServlet {
                         String nickname = new userDaoImpl().getUserInfoById(Integer.valueOf(userId)).getNickname();
                         request.setAttribute("nickname", nickname);
                         request.setAttribute("userId", userId);
-
                     }
                 }
 
             }
-            forumDaoImpl dao = new forumDaoImpl();
-            Forum forum = dao.getForumInfo();
-            List<Classify> allClassify = new classifyDaoImpl().getAllClassifyInfo();
-            List<Section> allSection = new sectionDaoImpl().getAllSection();
-            List<Post> top10Post = new postDaoImpl().getTop10Post();
+            String content = request.getParameter("content");
+            String postId = request.getParameter("postId");
+            Reply reply = new Reply();
+            reply.setContent(content);
+            reply.setUserId(Integer.valueOf(userId));
+            reply.setPostId(Integer.valueOf(postId));
 
-            request.setAttribute("classifyList", allClassify);
-            request.setAttribute("sectionList", allSection);
-            request.setAttribute("postList", top10Post);
+            int insertResult = new replyDaoImpl().addReply(reply);
+            request.setAttribute("insertResult", insertResult);
+            request.setAttribute("postId", postId);
             request.setAttribute("state", loginState);
 
-
-            request.getRequestDispatcher("/pages/index.jsp").forward(request, response);
+            request.getRequestDispatcher("/pages/post.jsp").forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {

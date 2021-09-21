@@ -6,7 +6,9 @@ import bbs.entity.Reply;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -45,16 +47,17 @@ public class postDaoImpl implements postDao {
     @Override
     public int addPost(Post post) throws SQLException, ClassNotFoundException {
         int sectionId = post.getSectionId();
-        int userId =post.getUserId();
-        String time = post.getTime();
+        int userId = post.getUserId();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        String time = df.format(new Date());// new Date()为获取当前系统时间
         String title = post.getTitle();
         String content = post.getContent();
-        String sqlString = "INSERT INTO posts (selectId,userId,time,title,content) VALUES (?,?,?,?,?)";
-        String[] params = {Integer.toString(sectionId),Integer.toString(userId),time,title,content};
+        String sqlString = "INSERT INTO posts (sectionId,userId,time,title,content) VALUES (?,?,?,?,?)";
+        String[] params = {Integer.toString(sectionId), Integer.toString(userId), time, title, content};
         baseDao basedao = new baseDao();
-        Map insertResult = basedao.sqlQuery(sqlString,params);
+        Map insertResult = basedao.sqlQuery(sqlString, params);
         int rowNum = (int) insertResult.get("rowNum");
-        return  rowNum;
+        return rowNum;
     }
 
     /**
@@ -230,6 +233,55 @@ public class postDaoImpl implements postDao {
             reply.setTime(selectResultSet.getString("time"));
             resultList.add(reply);
         }
+        return resultList;
+    }
+
+    /**
+     * 获取某一用户的所有post
+     *
+     * @param userId
+     */
+    @Override
+    public List getAllPostByUserId(int userId) throws SQLException, ClassNotFoundException {
+        List posts = new ArrayList();
+        baseDao basedao = new baseDao();
+        String sqlString = "SELECT * FROM posts WHERE userId=?";
+        String[] params = {Integer.toString(userId)};
+        Map selectResult = basedao.sqlQuery(sqlString, params);
+        ResultSet selectResultSet = (ResultSet) selectResult.get("selectResult");
+        while (selectResultSet.next()) {
+            Post post = new Post();
+            post.setPostId(selectResultSet.getInt("postId"));
+            post.setTitle(selectResultSet.getString("title"));
+            posts.add(post);
+        }
+
+        return posts;
+    }
+
+    /**
+     * 获取所有帖子
+     *
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    @Override
+    public List getAllPostManage() throws SQLException, ClassNotFoundException {
+        List resultList = new ArrayList();
+        String sqlString = "SELECT * FROM posts";
+        baseDao basedao = new baseDao();
+        Map selectResult = basedao.sqlQuery(sqlString, null);
+        ResultSet selectResultSet = (ResultSet) selectResult.get("selectResult");
+        while (selectResultSet.next()) {
+            Post post = new Post();
+            post.setPostId(selectResultSet.getInt("postId"));
+            post.setTitle(selectResultSet.getString("title"));
+            post.setUserId(selectResultSet.getInt("userId"));
+            post.setTime(selectResultSet.getString("time"));
+            resultList.add(post);
+        }
+
         return resultList;
     }
 

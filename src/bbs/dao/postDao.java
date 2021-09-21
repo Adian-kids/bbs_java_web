@@ -68,8 +68,24 @@ public interface postDao {
 
     /**
      * 获取某post下所有的reply
+     *
      * @param int postId
      */
     public List getAllReplyInfo(int postId) throws SQLException, ClassNotFoundException;
 
+    /**
+     * 获取某一用户的所有post
+     *
+     * @param int userId
+     */
+    public List getAllPostByUserId(int userId) throws SQLException, ClassNotFoundException;
+
+    /**
+     * 获取所有帖子
+     *
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    public List getAllPostManage() throws SQLException, ClassNotFoundException;
 }

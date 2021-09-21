@@ -1,15 +1,15 @@
 <%--
   Created by IntelliJ IDEA.
   User: adian
-  Date: 2021/9/14
-  Time: 下午8:33
+  Date: 2021/9/21
+  Time: 下午12:51
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="header.jsp" %>
 <html>
 <head>
-    <title>${post.title}</title>
+    <title>Title</title>
 </head>
 <body>
 <div class="container">
@@ -18,8 +18,7 @@
         <div class="col-md-4">
             <ol class="breadcrumb">
                 <li><a href="#">Forum</a></li>
-                <li><a href="/section">Section</a></li>
-                <li class="active">${post.title}</li>
+                <li class="active">addPost</li>
             </ol>
         </div>
         <div class="col-md-4">
@@ -40,44 +39,36 @@
             </c:if>
         </div>
     </div>
-    <div class="panel panel-primary">
-        <div class="panel-heading">帖子详情</div>
-        <div class="panel-body">
-            <h3>${post.title}</h3>
-            <hr/>
-            <h4>${post.content}</h4>
-        </div>
-    </div>
-    <form class="form-horizontal" role="form" action="addReply" method="get">
+    <form class="form-horizontal" role="form" action="addPostAction" method="get">
         <div class="form-group">
-            <label>发表评论</label>
+            <label>选择版块</label>
+            <select class="form-control" name="sectionId">
+                <c:forEach var="section" items="${sections}">
+                    <option value="${section.sectionId}">${section.name}</option>
+                </c:forEach>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>标题</label>
+            <input type="text" class="form-control" placeholder="标题" id="title" name="title">
+        </div>
+
+        <div class="form-group">
+            <label>正文</label>
             <textarea class="form-control" rows="5" id="content" name="content"></textarea>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-lg btn-block">回复</button>
-        </div>
-        <div class="form-group">
-            <input name="postId" hidden="hidden" value="${post.postId}">
+            <button type="submit" class="btn btn-primary btn-lg btn-block">发帖</button>
         </div>
     </form>
-    <c:forEach var="reply" items="${allReply}">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">回复来自<%=new userDaoImpl().getUserInfoById(pageContext.getAttributesScope("userId")).getNickname()%></h3>
-            </div>
-            <div class="panel-body">
-                    ${reply.content}
-            </div>
-        </div>
-    </c:forEach>
     <c:if test="${insertResult == 0}">
-        <div class="alert alert-danger" role="alert">评论失败</div>
+        <div class="alert alert-danger" role="alert">发帖失败，请联系管理员</div>
     </c:if>
     <c:if test="${insertResult == 1}">
-        <div class="alert alert-success" role="alert">评论成功</div>
-        <script> window.location.href="post?postId=${postId}"</script>
+        <div class="alert alert-success" role="alert">发布成功</div>
+        <script> window.location.href = "index"</script>
     </c:if>
-
 </div>
 </body>
 </html>

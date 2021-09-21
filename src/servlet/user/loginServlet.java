@@ -1,10 +1,12 @@
 package servlet.user;
 
+import bbs.dao.impl.baseDao;
 import bbs.dao.impl.userDaoImpl;
 import bbs.entity.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,7 +33,12 @@ public class loginServlet extends HttpServlet {
             user.setEmail(email);
             user.setPassword(passwd);
             int loginResult = new userDaoImpl().userLoginCheck(user);
-            request.setAttribute("loginResult",loginResult);
+            user = new userDaoImpl().getUserInfoByEmail(email);
+            if (loginResult == 1) {
+                response.addCookie(new Cookie("userId", Integer.toString(user.getUserId())));
+            }
+            request.setAttribute("loginResult", loginResult);
+            request.setAttribute("nickname", user.getNickname());
             request.getRequestDispatcher("/pages/login.jsp").forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();

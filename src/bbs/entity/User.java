@@ -2,7 +2,7 @@ package bbs.entity;
 
 public class User {
     private int userId;
-    private String nickName;
+    private String nickname;
     private String email;
     private String password;
     private String signature;
@@ -17,12 +17,12 @@ public class User {
         this.userId = userId;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getEmail() {

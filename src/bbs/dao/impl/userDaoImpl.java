@@ -63,7 +63,7 @@ public class userDaoImpl implements userDao {
     @Override
     public int editUserInfo(User user) throws SQLException, ClassNotFoundException {
         int userId = user.getUserId();
-        String nickname = user.getNickName();
+        String nickname = user.getNickname();
         String signature = user.getSignature();
         String sqlString = "UPDATE users SET nickname=?,signature=? WHERE userId=?";
         String[] params = {nickname,signature,Integer.toString(userId)};
@@ -105,8 +105,9 @@ public class userDaoImpl implements userDao {
         ResultSet selectResultSet = (ResultSet) selectResult.get("selectResult");
         while (selectResultSet.next()){
             user.setUserId(userId);
+            user.setSignature(selectResultSet.getString("signature"));
             user.setEmail(selectResultSet.getString("email"));
-            user.setNickName(selectResultSet.getString("nickname"));
+            user.setNickname(selectResultSet.getString("nickname"));
             user.setPicture(selectResultSet.getString("picture"));
             user.setRegTime(selectResultSet.getString("regTime"));
         }
@@ -150,13 +151,38 @@ public class userDaoImpl implements userDao {
         if (selectResultSet.next()){
             String passwd  = selectResultSet.getString("passwd");
             String passwdForm = new md5().md5Encrypt(user.getPassword());
-            if(passwdForm.equals(passwd)){
+            if (passwdForm.equals(passwd)) {
                 return 1;
-            }else {
+            } else {
                 return 0;
             }
-        }else {
+        } else {
             return 0;
         }
+    }
+
+    /**
+     * 通过EMAIL获取userId
+     *
+     * @param userId
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    @Override
+    public User getUserInfoByEmail(String email) throws SQLException, ClassNotFoundException {
+        User user = new User();
+        String sqlString = "SELECT * FROM users WHERE email=?";
+        int userId = 0;
+        String[] params = {email};
+        baseDao basedao = new baseDao();
+        Map selectResult = basedao.sqlQuery(sqlString, params);
+        ResultSet selctResultSet = (ResultSet) selectResult.get("selectResult");
+        while (selctResultSet.next()) {
+            user.setUserId(selctResultSet.getInt("userId"));
+            user.setNickname(selctResultSet.getString("nickname"));
+            user.setEmail(selctResultSet.getString("email"));
+        }
+        return user;
     }
 }

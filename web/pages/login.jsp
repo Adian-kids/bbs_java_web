@@ -19,7 +19,7 @@
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4">
-        <form class="form-horizontal" role="form" action="/bbs/login",method="POST">
+        <form class="form-horizontal" role="form" action="/bbs/login" method="POST">
             <div class="form-group">
                 <label for="email" class="col-sm-2 control-label">邮箱</label>
                 <div class="col-sm-10">
@@ -36,7 +36,8 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">登陆</button>
+                    <br>
+                    <button type="button" class="btn btn-primary">登陆</button>
                 </div>
             </div>
         </form>
@@ -45,6 +46,7 @@
         </c:if>
         <c:if test="${loginResult == 1}">
             <div class="alert alert-success" role="alert">登陆成功</div>
+            <script> window.location.href = "index"</script>
         </c:if>
     </div>
     <div class="col-md-4"></div>

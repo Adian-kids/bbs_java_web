@@ -19,58 +19,62 @@
             </ol>
         </div>
         <div class="col-md-4">
-            <div class="input-group">
-                <input type="text" class="form-control" aria-label="...">
-                <div class="input-group-btn">
-                    <button type="button" class="btn btn-default">Search</button>
-                </div>
-            </div>
+            <a href="addPost">
+                <button type="button" class="btn btn-primary btn-lg btn-block">发帖</button>
+            </a>
         </div>
         <div class="col-md-4">
-            <div class="border border-secondary">
-                <p align="right">您尚未<a href="#">登陆</a>|<a href="#">注册</a></p>
-            </div>
+            <c:if test="${state == 0}">
+                <div class="border border-secondary">
+                    <p align="right">您尚未<a href="pages/login.jsp">登陆</a>|<a href="pages/register.jsp">注册</a></p>
+                </div>
+            </c:if>
+            <c:if test="${state == 1}">
+                <div class="border border-secondary">
+                    <p align="right">欢迎${nickname},进入<a href="profile?userId=${userId}">个人主页</a></p>
+                </div>
+            </c:if>
         </div>
     </div>
-</div>
-<div class="container">
-    <div class="panel panel-default">
-        <!-- Default panel contents -->
-        <div class="panel-heading">${sectionName}</div>
-        <!-- Table -->
-        <table class="table">
-            <thead>
-            <tr>
-                <th>标题</th>
-                <th>作者</th>
-                <th>发送时间</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="post" items="${postList}">
+    <div class="container">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">${sectionName}</div>
+            <!-- Table -->
+            <table class="table">
+                <thead>
                 <tr>
-                    <td><a href="post?postId=${post.postId}">${post.title}</a></td>
-                    <td>${post.userId}</td>
-                    <td>${post.time}</td>
+                    <th>标题</th>
+                    <th>作者</th>
+                    <th>发送时间</th>
                 </tr>
-            </c:forEach>
-            </tbody>
+                </thead>
+                <tbody>
+                <c:forEach var="post" items="${postList}">
+                    <tr>
+                        <td><a href="post?postId=${post.postId}">${post.title}</a></td>
+                        <td>${post.userId}</td>
+                        <td>${post.time}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
 
 
-        </table>
+            </table>
+        </div>
+        <ul class="pager">
+
+            <c:if test="${page!=1}">
+                <li><a href="/section?sectionId=${sectionId}&page=${page-1}">上一页</a></li>
+            </c:if>
+            <c:if test="${pageSum!=1}">
+                <li><a href="/section?sectionId=${sectionId}&page=${page+1}">下一页</a></li>
+            </c:if>
+            <h4>当前是第${page}页,共${pageSum}页</h4>
+
+        </ul>
+
     </div>
-    <ul class="pager">
-
-        <c:if test="${page!=1}">
-            <li><a href="/section?sectionId=${sectionId}&page=${page-1}">上一页</a></li>
-        </c:if>
-        <c:if test="${pageSum!=1}">
-            <li><a href="/section?sectionId=${sectionId}&page=${page+1}">下一页</a></li>
-        </c:if>
-        <h4>当前是第${page}页,共${pageSum}页</h4>
-
-    </ul>
-
 </div>
 </body>
 </html>
