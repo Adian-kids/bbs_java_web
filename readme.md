@@ -1,8 +1,15 @@
 # Java_Web_bbs
 
+## 项目简介
+
+基于BootStrap + Servlet3的BBS论坛系统
+
+## 功能演示
+
 ## 数据库
 
 ### classify
+
 | 字段       | 类型    | 说明                |
 | ---------- | ------- | ------------------- |
 | classifyId | int     | 主键，Auto increase |
