@@ -19,7 +19,7 @@
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4">
-        <form class="form-horizontal" role="form" action="/bbs/login" method="POST">
+        <form class="form-horizontal" role="form" action="login" method="POST">
             <div class="form-group">
                 <label for="email" class="col-sm-2 control-label">邮箱</label>
                 <div class="col-sm-10">
@@ -37,7 +37,7 @@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <br>
-                    <button type="button" class="btn btn-primary">登陆</button>
+                    <button type="submit" class="btn btn-primary">登陆</button>
                 </div>
             </div>
         </form>

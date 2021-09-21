@@ -63,7 +63,9 @@
     <c:forEach var="reply" items="${allReply}">
         <div class="panel panel-info">
             <div class="panel-heading">
-                <h3 class="panel-title">回复来自<%=new userDaoImpl().getUserInfoById(pageContext.getAttributesScope("userId")).getNickname()%></h3>
+                <h3 class="panel-title">
+                    回复来自<%=new userDaoImpl().getUserInfoById(pageContext.getAttributesScope("userId")).getNickname()%>
+                </h3>
             </div>
             <div class="panel-body">
                     ${reply.content}
@@ -75,7 +77,7 @@
     </c:if>
     <c:if test="${insertResult == 1}">
         <div class="alert alert-success" role="alert">评论成功</div>
-        <script> window.location.href="post?postId=${postId}"</script>
+        <script> window.location.href = "post?postId=${postId}"</script>
     </c:if>
 
 </div>
