@@ -15,7 +15,7 @@
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4">
-        <form class="form-horizontal" role="form" action="register" method="POST">
+        <form class="form-horizontal" role="form" action="../register" method="POST">
             <div class="form-group">
                 <label for="email" class="col-sm-2 control-label">邮箱</label>
                 <div class="col-sm-10">
@@ -42,6 +42,7 @@
         </c:if>
         <c:if test="${regResult == 1}">
             <div class="alert alert-success" role="alert">注册成功</div>
+            <script> window.location.href = "index"</script>
         </c:if>
     </div>
     <div class="col-md-4"></div>

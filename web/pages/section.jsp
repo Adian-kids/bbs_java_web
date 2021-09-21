@@ -53,7 +53,8 @@
                 <c:forEach var="post" items="${postList}">
                     <tr>
                         <td><a href="post?postId=${post.postId}">${post.title}</a></td>
-                        <td>${post.userId}</td>
+                        <td><%=new userDaoImpl().getUserInfoById(pageContext.getAttributesScope("post.userId")).getNickname()%>
+                        </td>
                         <td>${post.time}</td>
                     </tr>
                 </c:forEach>

@@ -170,17 +170,20 @@ public class postDaoImpl implements postDao {
     public List getAllPost(int sectionId, int page) throws SQLException, ClassNotFoundException {
 
         int index = (int) ((page - 1) * 10 + 1);
-        int end = (int) ((page - 1)* 10 + 10);
+        int end = (int) ((page - 1) * 10 + 10);
         System.out.println(index);
         System.out.println(end);
+        if (page == 1) {
+            index = 0;
+        }
 
         List resultList = new ArrayList();
-        String sqlString = "SELECT * FROM posts WHERE sectionId=? LIMIT "+index+","+end;
+        String sqlString = "SELECT * FROM posts WHERE sectionId=? LIMIT " + index + "," + end;
         String[] params = {Integer.toString(sectionId)};
         baseDao basedao = new baseDao();
-        Map selectResult = basedao.sqlQuery(sqlString,params);
+        Map selectResult = basedao.sqlQuery(sqlString, params);
         ResultSet selectResultSet = (ResultSet) selectResult.get("selectResult");
-        while (selectResultSet.next()){
+        while (selectResultSet.next()) {
             Post post = new Post();
             post.setPostId(selectResultSet.getInt("postId"));
             post.setTitle(selectResultSet.getString("title"));

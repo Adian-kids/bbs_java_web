@@ -10,7 +10,86 @@
 
 直接访问即可进入主页
 
-## 数据库
+![](docpic/index.png)
+
+### 版块
+
+主页左侧版块列表中的版块，即可进入版块，每10条帖子一页
+
+![image-20210921173307987](docpic/section.png)
+
+### 注册
+
+点击右上角的注册，即可进入注册页面
+
+![image-20210921170232745](docpic/register.png)
+
+注册成功将跳转回主页进行登陆，注册时，后端将密码进行md5加密存入数据库
+
+![image-20210921170453933](docpic/reg-success.png)
+
+### 登陆
+
+页面如图
+
+![image-20210921170658495](docpic/login.png)
+
+登陆成功后，会获取到名为userId的cookies,并且页面会识别到此cookie视为登陆状态
+
+![image-20210921170848968](/home/adian/code/testcode/bbs_java_web/docpic/login-success.png)
+
+### 个人主页
+
+登陆后，点击个人主页，即可进入主页，对自己的帖子和信息进行管理
+
+![image-20210921171021049](docpic/ptofile.png)
+
+### 修改个人信息
+
+登陆后进入个人主页，点击修改信息
+
+![image-20210921171147586](docpic/editprofile.png)
+
+修改成功后，会如注册一样弹出绿色提示框，并跳转回个人主页
+
+![image-20210921171334221](/home/adian/code/testcode/bbs_java_web/docpic/new-profile.png)
+
+左侧可以直接删除自己的帖子，并且在此处做了cookie验证，当你访问别人的主页时，无修改和删除选项，防止平行越权
+
+![image-20210921171538831](docpic/otherprofile.png)
+
+### 发帖
+
+登陆后，点击发帖按钮进行发帖操作
+
+![image-20210921171755139](docpic/addpost.png)
+
+可以下拉版块列表选择版块
+
+### 评论
+
+![image-20210921172018629](docpic/reply.png)
+
+### 论坛管理
+
+访问/manage进入管理界面
+
+普通用户无权访问
+
+![image-20210921173547211](docpic/managefiled.png)
+
+管理员账户登陆可以对论坛信息和所有帖子进行操作
+
+![image-20210921173644987](docpic/manage.png)
+
+## 目前存在的问题
+
+- 单独用Cookies验证用户，存在非常严重的越权漏洞，可以同时进行平行越权和垂直越权
+- 帖子管理等位置ui交互不太对劲
+- 预留了很多接口，比如说版主的管理员身份
+- 没有搜索功能
+
+# 数据库
 
 ### classify
 
@@ -20,6 +99,7 @@
 | name       | varchar | 分类名称            |
 
 ### forum
+
 | 字段         | 类型     | 说明     |
 | ------------ | -------- | -------- |
 | name         | varchar  | 论坛名称 |
