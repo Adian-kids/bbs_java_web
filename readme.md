@@ -36,7 +36,7 @@
 
 登陆成功后，会获取到名为userId的cookies,并且页面会识别到此cookie视为登陆状态
 
-![image-20210921170848968](/home/adian/code/testcode/bbs_java_web/docpic/login-success.png)
+![image-20210921170848968](docpic/login-success.png)
 
 ### 个人主页
 
@@ -52,7 +52,7 @@
 
 修改成功后，会如注册一样弹出绿色提示框，并跳转回个人主页
 
-![image-20210921171334221](/home/adian/code/testcode/bbs_java_web/docpic/new-profile.png)
+![image-20210921171334221](docpic/new-profile.png)
 
 左侧可以直接删除自己的帖子，并且在此处做了cookie验证，当你访问别人的主页时，无修改和删除选项，防止平行越权
 
